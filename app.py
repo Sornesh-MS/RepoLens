@@ -18,7 +18,7 @@ def home():
 @app.route("/analyze/<username>", methods=["GET"])
 def analyze_github_profile(username):
 
-    # -------- Fetch Profile --------
+    # Fetch Profile
     profile_response = requests.get(GITHUB_BASE_URL + username)
 
     if profile_response.status_code != 200:
@@ -26,11 +26,11 @@ def analyze_github_profile(username):
 
     profile = profile_response.json()
 
-    # -------- Fetch Repositories --------
+    #Fetch Repositories
     repos_response = requests.get(GITHUB_BASE_URL + username + "/repos")
     repos = repos_response.json() if repos_response.status_code == 200 else []
 
-    # -------- Analyze Repositories --------
+    # Analyze Repositories
     total_stars = 0
     total_forks = 0
     languages = []
@@ -52,7 +52,7 @@ def analyze_github_profile(username):
             max_stars = stars
             most_starred_repo = repo.get("name")
 
-    # -------- Final JSON Response --------
+    # Final JSON Response
     result = {
         "username": username,
         "name": profile.get("name"),
