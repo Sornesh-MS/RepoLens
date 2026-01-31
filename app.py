@@ -11,11 +11,11 @@ GITHUB_BASE_URL = "https://api.github.com/users/"
 def home():
     return jsonify({
         "message": "GitHub Profile Analyzer API",
-        "usage": "/analyze/<github_username>"
+        "usage": "/<github_username>"
     })
 
 
-@app.route("/analyze/<username>", methods=["GET"])
+@app.route("/<username>")
 def analyze_github_profile(username):
 
     # Fetch Profile
