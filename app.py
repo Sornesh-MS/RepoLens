@@ -9,10 +9,7 @@ GITHUB_BASE_URL = "https://api.github.com/users/"
 
 @app.route("/")
 def home():
-    return jsonify({
-        "message": "GitHub Profile Analyzer API",
-        "usage": "/<github_username>"
-    })
+    return "Enter any username in url (eg: /Sornesh-MS)"
 
 
 @app.route("/<username>")
@@ -22,7 +19,7 @@ def analyze_github_profile(username):
     profile_response = requests.get(GITHUB_BASE_URL + username)
 
     if profile_response.status_code != 200:
-        return jsonify({"error": "GitHub user not found"}), 404
+        return "User not found [error : 400] - recheck or re-enter the username again"
 
     profile = profile_response.json()
 
