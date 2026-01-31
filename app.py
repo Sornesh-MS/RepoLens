@@ -50,7 +50,7 @@ def analyze_github_profile(username):
             most_starred_repo = repo.get("name")
 
     # Final JSON Response
-    result = {
+    json_result = {
         "username": username,
         "name": profile.get("name"),
         "bio": profile.get("bio"),
@@ -65,6 +65,22 @@ def analyze_github_profile(username):
             "most_starred_repository": most_starred_repo
         }
     }
+
+    #convert json into plain text
+    result=f"""
+    GitHub Analyzsed 
+    Username : {json_result["username"]}
+    Name : {json_result["name"]}
+    Bio : {json_result["bio"]}
+    Public Repositories : {json_result["public_repositories"]}
+    Followers : {json_result["followers"]}
+    Following : {json_result["following"]}
+    Total Repositories : {json_result["analysis"]["total_repositories"]}
+    Total Stars : {json_result["analysis"]["total_stars"]}
+    Total Forks : {json_result["analysis"]["total_forks"]}
+    Most Used Languages : {json_result["analysis"]["most_used_languages"]}
+    Most Starred Repository : {json_result["analysis"]["most_starred_repository"]}
+    """
 
     return jsonify(result)
 
