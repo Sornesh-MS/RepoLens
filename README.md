@@ -5,7 +5,7 @@ The application analyzes the user’s repositories and returns useful informatio
 such as total repositories, stars, forks, programming languages used, and the most
 starred repository.
 
-The project works as a REST API and returns results in JSON format.
+The project works as a REST API and returns results.
 It does not use any frontend, HTML, or CSS.
 
 This project is useful for learning Flask, REST APIs, and working with third-party APIs.
