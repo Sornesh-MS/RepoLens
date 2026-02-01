@@ -19,7 +19,7 @@ def analyze_github_profile(username):
     profile_response = requests.get(GITHUB_BASE_URL + username)
 
     if profile_response.status_code != 200:
-        return "User not found [error : 400] - recheck or re-enter the username again"
+        return "User not found [error : 400] \n recheck or re-enter the username again"
 
     profile = profile_response.json()
 
@@ -66,23 +66,30 @@ def analyze_github_profile(username):
         }
     }
 
-    #convert json into plain text
-    result=f"""
-    GitHub Analyzsed 
-    Username : {json_result["username"]}
-    Name : {json_result["name"]}
-    Bio : {json_result["bio"]}
-    Public Repositories : {json_result["public_repositories"]}
-    Followers : {json_result["followers"]}
-    Following : {json_result["following"]}
-    Total Repositories : {json_result["analysis"]["total_repositories"]}
-    Total Stars : {json_result["analysis"]["total_stars"]}
-    Total Forks : {json_result["analysis"]["total_forks"]}
-    Most Used Languages : {json_result["analysis"]["most_used_languages"]}
-    Most Starred Repository : {json_result["analysis"]["most_starred_repository"]}
-    """
 
-    return jsonify(result)
+    #convert json into plain text
+    result=(
+    "************ GitHub Analyzed ************\n\n"
+
+    "User Information\n"
+    "----------------\n"
+    f"Username            : {json_result['username']}\n"
+    f"Name                : {json_result['name']}\n"
+    f"Bio                 : {json_result['bio']}\n\n"
+
+    "Repository Information\n"
+    "----------------------\n"
+    f"Public Repositories  : {json_result['public_repositories']}\n"
+    f"Followers            : {json_result['followers']}\n"
+    f"Following            : {json_result['following']}\n"
+    f"Total Repositories   : {json_result['analysis']['total_repositories']}\n"
+    f"Total Stars          : {json_result['analysis']['total_stars']}\n"
+    f"Total Forks          : {json_result['analysis']['total_forks']}\n"
+    f"Most Used Languages  : {json_result['analysis']['most_used_languages']}\n"
+    f"Most Starred Repo    : {json_result['analysis']['most_starred_repository']}\n"
+)
+
+    return result, 200, {"Content-Type": "text/plain; charset=utf-8"}
 
 
 if __name__ == "__main__":
